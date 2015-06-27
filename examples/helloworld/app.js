@@ -1,1 +1,5 @@
-Ext.onReady (function(){glu.viewport('helloworld.main');});
+Ext.onReady (
+	function(){
+		glu.viewport('helloworld.main');
+	}
+);

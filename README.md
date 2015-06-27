@@ -18,24 +18,27 @@ The specification (in coffeescript because it keeps our specs very readable; you
 ```coffeescript
 Given 'the hello world app is launched', ->
   vm = null
-  Meaning -> vm = glu.model {ns:'helloworld',mtype:'main'}
+  Meaning -> 
+  	vm = glu.model {ns:'helloworld',mtype:'main'}
+  	vm.init()
+  	return vm
   ShouldHave 'set arriving to true', -> (expect vm.arriving).toBe true
-  ShouldHave 'set message to a welcome', -> (expect vm.message).toBe 'Hello World!'
+  ShouldHave 'set message to a welcome', -> (expect vm.msg1).toBe 'Hello World!'
   When 'the user changes his/her status', ->
     Meaning -> vm.set('arriving', false)
-    ShouldHave 'set message to a farewell', -> (expect vm.message).toBe 'Goodbye World!'
+    ShouldHave 'set message to a farewell', -> (expect vm.msg1).toBe 'Goodbye World!'
 ```
 The actual application (javascript):
 ```javascript
 glu.defModel('helloworld.main', {
     arriving:true,
-    message$:function () {
+    msg1$:function () {
         return this.localize(this.arriving ? 'greeting' : 'farewell')
     }
 });
 
 glu.defView('helloworld.main', {
-    title:'@{message}',
+    title:'@{msg1}',
     tbar:[
         {
             text:'Toggle',
@@ -57,6 +60,7 @@ Ext.onReady(function(){glu.viewport('helloworld.main');});
 If you really just want the minified libraries, grab them here:
 
 [http://www.conarrative.com/download/glujs-1.2.0.zip](http://www.conarrative.com/download/glujs-1.2.0.zip)
+(Is a dead link but the minified libraries are now in the /lib/glujs folder)
 
 If you want the source and full examples, clone this project from github.
 

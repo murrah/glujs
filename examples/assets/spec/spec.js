@@ -1,3 +1,11 @@
+/*
+
+THIS SPEC THROWS ERRORS!
+
+NEEDS FIXING
+
+ */
+
 (function() {
   var __hasProp = Object.prototype.hasOwnProperty;
 

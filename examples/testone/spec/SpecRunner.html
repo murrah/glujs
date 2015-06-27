@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Glu Test One Runner</title>
+
+  <!-- Jasmine -->
+  <link rel="shortcut icon" type="image/png" href="../../../lib/jasmine/lib/jasmine-2.3.4/jasmine_favicon.png">
+  <link rel="stylesheet" href="../../../lib/jasmine/lib/jasmine-2.3.4/jasmine.css">
+
+  <!-- Quick and dirty override to convert the pending items into 'ToDo' items -->
+  <style>
+    .jasmine_html-reporter .summary li.pending:before { color: #CC75FF; content: "ToDo: "; }
+    .jasmine_html-reporter .summary li.pending a { color: #CC75FF; }
+  </style>
+  
+  <script src="../../../lib/jasmine/lib/jasmine-2.3.4/jasmine.js"></script>
+  <script src="../../../lib/jasmine/lib/jasmine-2.3.4/jasmine-html.js"></script>
+  <script src="../../../lib/jasmine/lib/jasmine-2.3.4/boot.js"></script>
+
+  <!-- ExtJS -->
+  <script type="text/javascript" src="../../../lib/extjs-4.x/bootstrap.js"></script>
+
+  <!-- GluJS -->
+  <script type="text/javascript" src="../../../lib/glujs/glu-extjs-4.js"></script>
+  <script type="text/javascript" src="../../../lib/glujs/glu.js"></script>
+  <script type="text/javascript" src="../../../lib/glujs/glu-test.js"></script>
+
+  <!-- source files -->
+  <script type="text/javascript" src="../locale/locale_en.js"></script>
+
+  <script type="text/javascript" src="../models/mUser.js"></script>
+  
+  <script type="text/javascript" src="../viewmodels/vmMain.js"></script>
+  <script type="text/javascript" src="../viewmodels/vmLoginForm.js"></script>
+
+  <script type="text/javascript" src="../views/vMain.js"></script>
+  <script type="text/javascript" src="../views/vLoginForm.js"></script>
+
+  <script type="text/javascript" src="spec.js"></script>
+</head>
+
+<body></body>
+</html>
