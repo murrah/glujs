@@ -10,8 +10,8 @@ Ext.apply(glu.provider.binder, {
         }
         var xtype = config.xtype;
         var adapter = null;
-        do {
-            adapter = glu.provider.adapters[xtype];
+        
+        do { adapter = glu.provider.adapters[xtype];
             if (!adapter) {
                 if (Ext.getVersion().major > 3 || Ext.getProvider().provider == 'touch') {
                     var currentType = Ext.ClassManager.getByAlias('widget.' + xtype);
@@ -25,9 +25,11 @@ Ext.apply(glu.provider.binder, {
                         throw (xtype + ' is not a valid xtype');
                     }
                     xtype = currentType.superclass.constructor.xtype;
-                }
+                };
+            };
+                // MH. Without a variable here Sencha Cmd adds a random semi colon before the while then chokes!
+            var _SenchaCmd_fix=0;
 
-            }
         } while (!adapter);
         //use the xtype chain
 
