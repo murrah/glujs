@@ -21,6 +21,6 @@ Installation
     (bootstrap.js should be immediately in that location).
  4. TO RUN EXAMPLES: In a browser, open the index.html file located in the example of your choice.
     GluJS' emulation framework will allow the AJAX calls to work even when loading from the local filesystem.
- 5. TO TEST EXAMPLES: In a browser open the spec/runner.html file located in the example of your choice.
- 6. Enjoy using GluJS (http://www.conarrative.com/glujs).
+ 5. TO TEST EXAMPLES: In a browser open the spec/SpecRunner.html file located in the example of your choice.
+ 6. Enjoy using GluJS (http://conarrative.github.io/glujs-guide/).
     Visit our forums (https://groups.google.com/forum/#!forum/glujs) if you have any questions.
