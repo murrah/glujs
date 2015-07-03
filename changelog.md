@@ -1,5 +1,24 @@
 #Change Log
-Glu JS 1.2
+Glu JS 1.2.1
+##1.2.1
+Mostly mods to get GluJS to play with Sencha Cmd
+
+###New
+Examples:
+ * Reorganised the folder structure so that GluJS, ExtJS and Jasmine libraries are shared between the examples
+ * Preloaded Jasmine 2.3.4
+ * Preloaded a working version of GluJS minified files
+ * Fixed what I could to get the examples working:
+    1. Helloworld and ToDoMVC apps and specs work out of the box
+    1. Assets app works but the spec is broken
+    1. Assets-touch is not complete. It wont work at all and I didnt touch it
+ * Added an example of my own that I used to learn GluJS. It is called testone. It's a bit more complex than the helloworld example but not as complex as the others. I am sure it can be improved!
+ * Added an Admin Control Panel example which relates to the changes to get Sencha Cmd working.
+
+###Fixes
+ * build.js: Node path.existsSync() no longer exists (node 12). Changed to fs.existsSync() which is also deprecated. To be fixed later. 
+ * Extjs4 adapter: Sencha Cmd added a random semi colon to the minified glujs code and then choked. Added a do-nothing variable that resolved that misunderstanding
+
 
 ##1.2
 
