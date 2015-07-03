@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>cPanel Runner</title>
+
+  <!-- Jasmine files -->
+  <link rel="shortcut icon" type="image/png" href="BDDlib/jasmine/lib/jasmine-2.3.4/jasmine_favicon.png">
+  <link rel="stylesheet" href="BDDlib/jasmine/lib/jasmine-2.3.4/jasmine.css">
+  
+  <!-- Quick and dirty override to convert the pending items into 'ToDo' items. Just for fun. -->
+  <style>
+    .jasmine_html-reporter .summary li.pending:before { color: #CC75FF; content: "ToDo: "; }
+    .jasmine_html-reporter .summary li.pending a { color: #CC75FF; }
+  </style>
+
+  <script src="BDDlib/jasmine/lib/jasmine-2.3.4/jasmine.js"></script>
+  <script src="BDDlib/jasmine/lib/jasmine-2.3.4/jasmine-html.js"></script>
+  <script src="BDDlib/jasmine/lib/jasmine-2.3.4/boot.js"></script>
+
+  <!-- ExtJS bootstrap so the Loader knows what to do -->
+  <script type="text/javascript" src="ext/bootstrap.js"></script>
+
+  <!-- My GluJS specific custom matcher. You only need this file if you want to use this matcher. -->
+  <script type="text/javascript" src="BDDlib/glu/glu-test-custommatchers.js"></script>
+
+  <!-- Now everything has been loaded this starts the app. 
+  ie it runs the specs defined in appSpec.js (but doesnt run the actual app, of course)
+  -->
+  <script type="text/javascript" src="appSpec.js"></script>
+</head>
+
+<body></body>
+</html>
