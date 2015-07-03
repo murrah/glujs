@@ -1,7 +1,4 @@
 
-// Copyright (c) 2012 CoNarrative - http://www.conarrative.com/
-// License: MIT (http://www.opensource.org/licenses/mit-license.php)
-// GluJS version 1.1.0
 Ext.define('Glu.glu-test', {
 requires : [
     'Glu.glu-extjs-4',
