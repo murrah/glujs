@@ -2,11 +2,15 @@ var buildDir = 'build';
 
 var path = require('path');
 var UglifyJS = require("uglify-js");
-var fs = require('fs');
+var fse = require('fs-extra');
 var cli = require('commander');
 var wrench = require('wrench');
 var glob = require('glob-whatev')
 
+var license = "// Copyright (c) 2012 CoNarrative - http://www.conarrative.com/\n" +
+    "// License: MIT (http://www.opensource.org/licenses/mit-license.php)\n" +
+    "// GluJS version 1.2.1\n" +
+    "// Built by Murray Hopkins from Ryan Smith fork\n";
 
 cli
     .version('0.1.0')
@@ -37,12 +41,15 @@ function build() {
 }
 
 function clean() {
-    if (fs.existsSync(buildDir)) {
+    fse.removeSync(buildDir);
+
+/* wrench >= 1.5 will not remove a non-empty directory
+    if (fse.existsSync(buildDir)) {
         wrench.rmdirSyncRecursive('build');
         console.log('deleted old build.');
     } else {
         console.log('no old build to clean.');
-    }
+    }*/
 }
 
 function copyExamples() {
@@ -97,10 +104,7 @@ function gluJSExt4() {
 }
 
 //MINI-BUILD LIBRARY
-var license = "// Copyright (c) 2012 CoNarrative - http://www.conarrative.com/\n" +
-    "// License: MIT (http://www.opensource.org/licenses/mit-license.php)\n" +
-    "// GluJS version 1.1.0 (maybe it is actually 1.2.0?)\n" +
-    "// Build by Murray Hopkins from Ryan Smith fork\n";
+
 function concat(combined, files) {
     //make parent directory of combined output file
     var lastSlashIdx = combined.lastIndexOf('/');
@@ -114,7 +118,7 @@ function concat(combined, files) {
         files = files.toArray();
     }
     var out = files.map(function (filePath) {
-        var src = fs.readFileSync(filePath, 'utf8');
+        var src = fse.readFileSync(filePath, 'utf8');
         return cli.isPretty ?
             '//BEGIN ' + filePath + "\n" + src + '//END' + filePath + "\n" :
             src;
@@ -122,7 +126,7 @@ function concat(combined, files) {
     var final = cli.pretty ?
         license + '\n' + out.join('\n') :
         license + uglify(out.join(' '));
-    fs.writeFileSync(combined, final, 'utf8');
+    fse.writeFileSync(combined, final, 'utf8');
 }
 
 function uglify(code) {
@@ -153,17 +157,17 @@ FileList.prototype.toArray = function () {
 
 copyDirs = function(sourceDir, newDir, filter) {
     filter = filter || function(){};
-    var checkDir = fs.statSync(sourceDir);
+    var checkDir = fse.statSync(sourceDir);
     try {
-        fs.mkdirSync(newDir, checkDir.mode);
+        fse.mkdirSync(newDir, checkDir.mode);
     } catch (e) {
         if (e.code !== 'EEXIST') throw e;
     }
-    var files = fs.readdirSync(sourceDir);
+    var files = fse.readdirSync(sourceDir);
     for(var i = 0; i < files.length; i++) {
         var filename = files[i];
         var destPath = newDir + '/' + filename;
-        var currFile = fs.lstatSync(sourceDir + '/' + filename);
+        var currFile = fse.lstatSync(sourceDir + '/' + filename);
         if(currFile.isDirectory()) {
             //directory
             if (filter('d', sourceDir, filename)!==false) {
@@ -171,27 +175,27 @@ copyDirs = function(sourceDir, newDir, filter) {
             }
         } else if(currFile.isSymbolicLink()) {
             //sym link
-            var symlink = fs.readlinkSync(sourceDir + '/' + filename);
+            var symlink = fse.readlinkSync(sourceDir + '/' + filename);
             if (filter('s', sourceDir, filename)!=false) {
-                fs.symlinkSync(symlink, destPath);
+                fse.symlinkSync(symlink, destPath);
             }
         } else {
             //file
-            var contents = fs.readFileSync(sourceDir + '/' + filename, 'utf8');
+            var contents = fse.readFileSync(sourceDir + '/' + filename, 'utf8');
             var filtered = filter('f', sourceDir, filename, contents);
             if (filtered!=false) {
                 if (typeof(filtered)==='string') {
                     contents = filtered;
                 }
-                fs.writeFileSync(destPath, contents);
+                fse.writeFileSync(destPath, contents);
             }
         }
     }
 };
 
 function copyToBuild(oldFileName){
-    oldFile = fs.createReadStream(oldFileName);
-    newFile = fs.createWriteStream(buildDir + '/' + oldFileName);
+    oldFile = fse.createReadStream(oldFileName);
+    newFile = fse.createWriteStream(buildDir + '/' + oldFileName);
     require('util').pump(oldFile, newFile);
 }
 
